@@ -12,7 +12,7 @@ from app.views import (
 )
 import os
 from app.db import engine
-from app.models import Base
+from app.models.base import Base
 
 db_path = "data/ehr.db"
 if not os.path.exists(db_path):
