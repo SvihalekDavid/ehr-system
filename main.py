@@ -10,6 +10,14 @@ from app.views import (
     admin, eeg, alcohol_intake, neurological_symptoms, clinical_exam,
     vital_signs, social_background
 )
+import os
+from app.db import engine
+from app.models import Base
+
+db_path = "data/ehr.db"
+if not os.path.exists(db_path):
+    print("📄 Vytvářím databázi...")
+    Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
