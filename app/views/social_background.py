@@ -112,7 +112,9 @@ def inspect_social_record(record_id: str, request: Request, db: Session = Depend
 @router.get("/social/{record_id}/fhir", response_class=JSONResponse)
 def export_social_fhir(record_id: str, db: Session = Depends(get_db)):
     record = db.get(SocialBackground, record_id)
-    fhir_data = social_background_to_fhir(record)
+    patient = db.get(Patient, record.patient_id)
+    user = db.get(User, record.user_id) if record.user_id else None
+    fhir_data = social_background_to_fhir(record, patient=patient, user=user)
     return JSONResponse(content=fhir_data)
 
 

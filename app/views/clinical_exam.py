@@ -117,5 +117,7 @@ def inspect_clinical_record(record_id: str, request: Request, db: Session = Depe
 @router.get("/clinical/{record_id}/fhir", response_class=JSONResponse)
 def export_clinical_fhir(record_id: str, db: Session = Depends(get_db)):
     record = db.get(ClinicalExam, record_id)
-    fhir_data = clinical_exam_to_fhir(record)
+    patient = db.get(Patient, record.patient_id)
+    user = db.get(User, record.user_id) if record.user_id else None
+    fhir_data = clinical_exam_to_fhir(record, patient=patient, user=user)
     return JSONResponse(content=fhir_data)

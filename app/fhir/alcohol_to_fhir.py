@@ -1,6 +1,6 @@
 from datetime import datetime
 
-def alcohol_intake_to_fhir(record):
+def alcohol_intake_to_fhir(record, patient=None, user=None):
     fhir = {
         "resourceType": "Observation",
         "id": record.id,
@@ -16,30 +16,32 @@ def alcohol_intake_to_fhir(record):
             "coding": [{
                 "system": "http://loinc.org",
                 "code": "80439-3",
-                "display": "Alcohol consumption panel"
+                "display": "Alcohol intake panel"
             }],
             "text": "Alcohol consumption"
         },
         "subject": {
-            "reference": f"Patient/{record.patient_id}"
+            "reference": f"Patient/{record.patient_id}",
+            "display": patient.name if patient else "Unknown Patient"
         },
         "effectiveDateTime": record.timestamp.isoformat(),
         "issued": record.created_at.isoformat() if record.created_at else datetime.now().isoformat(),
         "performer": [{
-            "reference": f"Practitioner/{record.user_id}" if record.user_id else "Practitioner/unknown"
+            "reference": f"Practitioner/{record.user_id}" if record.user_id else "Practitioner/unknown",
+            "display": user.name if user else "Unknown Practitioner"
         }],
         "component": []
     }
 
-    if record.alcohol_type:
-        fhir["component"].append({
-            "code": {"text": "Type"},
-            "valueString": record.alcohol_type
-        })
-
     if record.amount_units is not None:
         fhir["component"].append({
-            "code": {"text": "Amount (units)"},
+            "code": {
+                "coding": [{
+                    "system": "SNOMED CT",
+                    "code": "228313008",
+                    "display": "Units of alcohol consumed per week"
+                }]
+            },
             "valueQuantity": {
                 "value": record.amount_units,
                 "unit": "units"
@@ -48,8 +50,20 @@ def alcohol_intake_to_fhir(record):
 
     if record.frequency:
         fhir["component"].append({
-            "code": {"text": "Frequency"},
+            "code": {
+                "coding": [{
+                    "system": "SNOMED CT",
+                    "code": "289152009",
+                    "display": "Drinking frequency"
+                }]
+            },
             "valueString": record.frequency
+        })
+
+    if record.alcohol_type:
+        fhir["component"].append({
+            "code": {"text": "Type"},
+            "valueString": record.alcohol_type
         })
 
     if record.audit_score is not None:

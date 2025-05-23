@@ -117,5 +117,7 @@ def inspect_eeg_record(eeg_id: str, request: Request, db: Session = Depends(get_
 @router.get("/eeg/{eeg_id}/fhir", response_class=JSONResponse)
 def export_eeg_to_fhir(eeg_id: str, db: Session = Depends(get_db)):
     record = db.get(EEGRecord, eeg_id)
-    fhir_data = eeg_record_to_fhir(record)
+    patient = db.get(Patient, record.patient_id)
+    user = db.get(User, record.user_id) if record.user_id else None
+    fhir_data = eeg_record_to_fhir(record, patient=patient, user=user)
     return JSONResponse(content=fhir_data)
