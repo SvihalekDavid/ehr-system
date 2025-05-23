@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Upravit organizaci{% endblock %}
+{% block content %}
+<h2>Upravit organizaci</h2>
+<form action="/admin/organisations/{{ org.id }}/edit" method="post">
+    <label for="name">Název organizace:</label><br>
+    <input type="text" name="name" value="{{ org.name }}" required><br><br>
+
+    <label for="address">Adresa:</label><br>
+    <input type="text" name="address" value="{{ org.address }}" required><br><br>
+
+    <button type="submit" class="button">💾 Uložit změny</button>
+</form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Detail klinického vyšetření{% endblock %}
+{% block content %}
+<h2>Detail klinického vyšetření</h2>
+<table>
+    <tr><th>ID</th><td>{{ record.id }}</td></tr>
+    <tr><th>Pacient</th><td>{{ patient_name }}</td></tr>
+    <tr><th>Vyšetřující</th><td>{{ user_name }}</td></tr>
+    <tr><th>Timestamp</th><td>{{ record.timestamp }}</td></tr>
+    <tr><th>GCS</th><td>{{ record.gcs }}</td></tr>
+    <tr><th>Orientation</th><td>{{ record.orientation }}</td></tr>
+    <tr><th>Arm strength</th><td>{{ record.arm_strength }}</td></tr>
+    <tr><th>Leg strength</th><td>{{ record.leg_strength }}</td></tr>
+    <tr><th>Note</th><td>{{ record.clinical_note }}</td></tr>
+    <tr><th>Version</th><td>{{ record.version }}</td></tr>
+    <tr><th>Created at</th><td>{{ record.created_at }}</td></tr>
+    <tr><th>Updated at</th><td>{{ record.updated_at }}</td></tr>
+</table>
+<a href="/patients/{{ record.patient_id }}" class="button">⬅️ Zpět na pacienta</a>
+{% endblock %}

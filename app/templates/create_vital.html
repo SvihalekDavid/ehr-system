@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Přidat vitální funkce{% endblock %}
+{% block content %}
+<h2>Přidat vitální funkce</h2>
+<form action="" method="post">
+    <label for="timestamp">Datum a čas záznamu:</label><br>
+    <input type="datetime-local" name="timestamp" required><br><br>
+
+    <label for="user_id">Zapsal uživatel:</label><br>
+    <select name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user.id }}">{{ user.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="temperature">Teplota (°C):</label><br>
+    <input type="number" step="0.1" name="temperature"><br><br>
+
+    <label for="bp_systolic">Systolický tlak:</label><br>
+    <input type="number" name="bp_systolic"><br><br>
+
+    <label for="bp_diastolic">Diastolický tlak:</label><br>
+    <input type="number" name="bp_diastolic"><br><br>
+
+    <label for="heart_rate">Tepová frekvence:</label><br>
+    <input type="number" name="heart_rate"><br><br>
+
+    <label for="version">Verze záznamu:</label><br>
+    <input type="number" name="version" value="1" required><br><br>
+
+    <button type="submit" class="button">💾 Uložit</button>
+</form>
+{% endblock %}

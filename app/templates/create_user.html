@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Přidat uživatele{% endblock %}
+{% block content %}
+<h2>Přidat uživatele</h2>
+<form action="/admin/users/create" method="post">
+    <label for="name">Jméno:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label for="role">Role:</label><br>
+    <input type="text" name="role" required><br><br>
+
+    <label for="organisation_id">Organizace:</label><br>
+    <select name="organisation_id">
+        <option value="">(Bez organizace)</option>
+        {% for org in orgs %}
+        <option value="{{ org.id }}">{{ org.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit" class="button">💾 Uložit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Detail neurologických příznaků{% endblock %}
+{% block content %}
+<h2>Detail neurologických příznaků</h2>
+<table>
+    <tr><th>ID</th><td>{{ record.id }}</td></tr>
+    <tr><th>Pacient</th><td>{{ patient_name }}</td></tr>
+    <tr><th>Vyšetřující</th><td>{{ user_name }}</td></tr>
+    <tr><th>Timestamp</th><td>{{ record.timestamp }}</td></tr>
+    <tr><th>Headache</th><td>{{ record.headache }}</td></tr>
+    <tr><th>Headache type</th><td>{{ record.headache_type }}</td></tr>
+    <tr><th>Intensity</th><td>{{ record.intensity }}</td></tr>
+    <tr><th>Dizziness</th><td>{{ record.dizziness }}</td></tr>
+    <tr><th>Balance issues</th><td>{{ record.balance_issues }}</td></tr>
+    <tr><th>Consciousness issues</th><td>{{ record.consciousness_issues }}</td></tr>
+    <tr><th>Drunk feeling</th><td>{{ record.drunk_feeling }}</td></tr>
+    <tr><th>Version</th><td>{{ record.version }}</td></tr>
+    <tr><th>Created at</th><td>{{ record.created_at }}</td></tr>
+    <tr><th>Updated at</th><td>{{ record.updated_at }}</td></tr>
+</table>
+<a href="/patients/{{ record.patient_id }}" class="button">⬅️ Zpět na pacienta</a>
+{% endblock %}

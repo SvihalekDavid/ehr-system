@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Přidat neurologické symptomy{% endblock %}
+{% block content %}
+<h2>Přidat neurologické symptomy</h2>
+<form action="" method="post">
+    <label for="timestamp">Datum a čas záznamu:</label><br>
+    <input type="datetime-local" name="timestamp" required><br><br>
+
+    <label for="user_id">Vyšetřující lékař:</label><br>
+    <select name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user.id }}">{{ user.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Bolest hlavy:</label><br>
+    <select name="headache" required>
+        <option value="False">Ne</option>
+        <option value="True">Ano</option>
+    </select><br><br>
+
+    <label for="headache_type">Typ bolesti hlavy:</label><br>
+    <input type="text" name="headache_type"><br><br>
+
+    <label for="intensity">Intenzita (1-10):</label><br>
+    <input type="number" name="intensity" min="1" max="10"><br><br>
+
+    <label>Závratě:</label><br>
+    <select name="dizziness" required>
+        <option value="False">Ne</option>
+        <option value="True">Ano</option>
+    </select><br><br>
+
+    <label>Poruchy rovnováhy:</label><br>
+    <select name="balance_issues" required>
+        <option value="False">Ne</option>
+        <option value="True">Ano</option>
+    </select><br><br>
+
+    <label>Poruchy vědomí:</label><br>
+    <select name="consciousness_issues" required>
+        <option value="False">Ne</option>
+        <option value="True">Ano</option>
+    </select><br><br>
+
+    <label>Pocit opilosti:</label><br>
+    <select name="drunk_feeling" required>
+        <option value="False">Ne</option>
+        <option value="True">Ano</option>
+    </select><br><br>
+
+    <label for="version">Verze záznamu:</label><br>
+    <input type="number" name="version" value="1" required><br><br>
+
+    <button type="submit" class="button">💾 Uložit</button>
+</form>
+{% endblock %}

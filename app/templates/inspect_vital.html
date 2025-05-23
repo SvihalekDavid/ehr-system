@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Detail vitálních funkcí{% endblock %}
+{% block content %}
+<h2>Detail vitálních funkcí</h2>
+<table>
+    <tr><th>ID</th><td>{{ record.id }}</td></tr>
+    <tr><th>Pacient</th><td>{{ patient_name }}</td></tr>
+    <tr><th>Vyšetřující</th><td>{{ user_name }}</td></tr>
+    <tr><th>Timestamp</th><td>{{ record.timestamp }}</td></tr>
+    <tr><th>Teplota</th><td>{{ record.temperature }}</td></tr>
+    <tr><th>TK (systolický)</th><td>{{ record.bp_systolic }}</td></tr>
+    <tr><th>TK (diastolický)</th><td>{{ record.bp_diastolic }}</td></tr>
+    <tr><th>Tepová frekvence</th><td>{{ record.heart_rate }}</td></tr>
+    <tr><th>Verze</th><td>{{ record.version }}</td></tr>
+    <tr><th>Vytvořeno</th><td>{{ record.created_at }}</td></tr>
+    <tr><th>Upraveno</th><td>{{ record.updated_at }}</td></tr>
+</table>
+<a href="/patients/{{ record.patient_id }}" class="button">⬅️ Zpět na pacienta</a>
+{% endblock %}

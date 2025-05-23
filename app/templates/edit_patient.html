@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Upravit pacienta{% endblock %}
+{% block content %}
+<h2>Upravit pacienta</h2>
+<form action="/patients/{{ patient.id }}/edit" method="post">
+    <label for="name">Jméno:</label><br>
+    <input type="text" id="name" name="name" value="{{ patient.name }}" required><br><br>
+
+    <label for="birth_date">Datum narození:</label><br>
+    <input type="date" id="birth_date" name="birth_date" value="{{ patient.birth_date }}" required><br><br>
+
+    <label for="sex">Pohlaví:</label><br>
+    <select name="sex" id="sex" required>
+        <option value="M" {% if patient.sex == 'M' %}selected{% endif %}>Muž</option>
+        <option value="F" {% if patient.sex == 'F' %}selected{% endif %}>Žena</option>
+        <option value="O" {% if patient.sex == 'O' %}selected{% endif %}>Jiné</option>
+    </select><br><br>
+
+    <button type="submit" class="button">💾 Uložit změny</button>
+</form>
+{% endblock %}

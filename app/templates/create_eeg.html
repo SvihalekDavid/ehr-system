@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Přidat EEG záznam{% endblock %}
+{% block content %}
+<h2>Přidat EEG záznam pro pacienta</h2>
+<form action="" method="post">
+    <label for="timestamp">Datum a čas vyšetření:</label><br>
+    <input type="datetime-local" name="timestamp" required><br><br>
+
+    <label for="user_id">Vyšetřující lékař:</label><br>
+    <select name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user.id }}">{{ user.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="eeg_type">Typ EEG:</label><br>
+    <input type="text" name="eeg_type" required><br><br>
+
+    <label for="dominant_frequency">Dominantní frekvence (Hz):</label><br>
+    <input type="number" step="0.01" name="dominant_frequency" required><br><br>
+
+    <label for="abnormal_rhythms">Abnormální rytmy:</label><br>
+    <select name="abnormal_rhythms">
+        <option value="False">Ne</option>
+        <option value="True">Ano</option>
+    </select><br><br>
+
+    <label for="abnormal_rhythm_type">Typ abnormálního rytmu:</label><br>
+    <input type="text" name="abnormal_rhythm_type"><br><br>
+
+    <label for="technician_comment">Komentář laboranta:</label><br>
+    <textarea name="technician_comment" required></textarea><br><br>
+
+    <label for="version">Verze záznamu:</label><br>
+    <input type="number" name="version" value="1" required><br><br>
+
+    <button type="submit" class="button">💾 Uložit záznam</button>
+</form>
+{% endblock %}

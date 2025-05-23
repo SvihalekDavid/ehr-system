@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}Detail pacienta{% endblock %}
+{% block content %}
+<h2>Detail pacienta</h2>
+
+<p><strong>Jméno:</strong> {{ patient.name }}</p>
+<p><strong>Datum narození:</strong> {{ patient.birth_date }}</p>
+<p><strong>Pohlaví:</strong> {{ patient.sex }}</p>
+
+<hr>
+
+<h3>Vyšetření</h3>
+
+<h4>EEG záznamy</h4>
+<a href="/patients/{{ patient.id }}/eeg/create">➕ Přidat EEG</a>
+<ul>
+{% for record in eeg_records %}
+    <li>
+        <strong>{{ record.timestamp.strftime('%Y-%m-%d %H:%M') }}</strong>,
+        typ: {{ record.eeg_type }},
+        domin. freq: {{ record.dominant_frequency }} Hz,
+        rytmy: {{ "ano" if record.abnormal_rhythms else "ne" }}
+        <a href="/eeg/{{ record.id }}">🔍</a>
+        <a href="/eeg/{{ record.id }}/fhir" target="_blank">📤</a>
+        <a href="/eeg/{{ record.id }}/edit">✏️</a>
+        <form action="/eeg/{{ record.id }}/delete" method="post" style="display:inline;">
+        <button type="submit" style="background:none;border:none;color:#e74c3c;cursor:pointer;">❌</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+<h4>Konzumace alkoholu</h4>
+<a href="/patients/{{ patient.id }}/alcohol/create">➕ Přidat záznam</a>
+<ul>
+{% for record in alcohol_records %}
+    <li>
+        {{ record.timestamp.strftime('%Y-%m-%d') }},
+        typ: {{ record.alcohol_type }},
+        množství: {{ record.amount_units }} jednotek
+        <a href="/alcohol/{{ record.id }}">🔍</a>
+        <a href="/alcohol/{{ record.id }}/fhir" target="_blank">📤</a>
+        <a href="/alcohol/{{ record.id }}/edit">✏️</a>
+        <form action="/alcohol/{{ record.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" style="background:none;border:none;color:#e74c3c;cursor:pointer;">❌</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+<h4>Neurologické příznaky</h4>
+<a href="/patients/{{ patient.id }}/neuro/create">➕ Přidat záznam</a>
+<ul>
+{% for record in neurological_records %}
+    <li>
+        {{ record.timestamp.strftime('%Y-%m-%d %H:%M') }},
+        bolest hlavy: {{ "ano" if record.headache else "ne" }},
+        závratě: {{ "ano" if record.dizziness else "ne" }},
+        rovnováha: {{ "ano" if record.balance_issues else "ne" }}
+        <a href="/neuro/{{ record.id }}">🔍</a>
+        <a href="/neuro/{{ record.id }}/fhir" target="_blank">📤</a>
+        <a href="/neuro/{{ record.id }}/edit">✏️</a>
+        <form action="/neuro/{{ record.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" style="background:none;border:none;color:#e74c3c;cursor:pointer;">❌</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+<h4>Klinické vyšetření</h4>
+<a href="/patients/{{ patient.id }}/clinical/create">➕ Přidat záznam</a>
+<ul>
+{% for record in clinical_records %}
+    <li>
+        {{ record.timestamp.strftime('%Y-%m-%d %H:%M') }},
+        GCS: {{ record.gcs }},
+        orientace: {{ "ano" if record.orientation else "ne" }},
+        <a href="/clinical/{{ record.id }}">🔍</a>
+        <a href="/clinical/{{ record.id }}/fhir" target="_blank">📤</a>
+        <a href="/clinical/{{ record.id }}/edit">✏️</a>
+        <form action="/clinical/{{ record.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" style="background:none;border:none;color:#e74c3c;cursor:pointer;">❌</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+
+<h4>Vitální funkce</h4>
+<a href="/patients/{{ patient.id }}/vital/create">➕ Přidat záznam</a>
+<ul>
+{% for record in vital_records %}
+    <li>
+        {{ record.timestamp.strftime('%Y-%m-%d %H:%M') }},
+        temp: {{ record.temperature }} °C,
+        TK: {{ record.bp_systolic }}/{{ record.bp_diastolic }},
+        tep: {{ record.heart_rate }} bpm
+        <a href="/vital/{{ record.id }}">🔍</a>
+        <a href="/vital/{{ record.id }}/fhir" target="_blank">📤</a>
+        <a href="/vital/{{ record.id }}/edit">✏️</a>
+        <form action="/vital/{{ record.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" style="background:none;border:none;color:#e74c3c;cursor:pointer;">❌</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+<h4>Sociální anamnéza</h4>
+<a href="/patients/{{ patient.id }}/social/create">➕ Přidat záznam</a>
+<ul>
+{% for record in social_records %}
+    <li>
+        {{ record.timestamp.strftime('%Y-%m-%d') }},
+        povolání: {{ record.occupation }},
+        spánek: {{ record.sleep_pattern }} ({{ record.sleep_duration }} h)
+        <a href="/social/{{ record.id }}">🔍</a>
+        <a href="/social/{{ record.id }}/fhir" target="_blank">📤</a>
+        <a href="/social/{{ record.id }}/edit">✏️</a>
+        <form action="/social/{{ record.id }}/delete" method="post" style="display:inline;">
+            <button type="submit" style="background:none;border:none;color:#e74c3c;cursor:pointer;">❌</button>
+        </form>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

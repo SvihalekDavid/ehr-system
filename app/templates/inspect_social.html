@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Detail sociální anamnézy{% endblock %}
+{% block content %}
+<h2>Detail sociální anamnézy</h2>
+<table>
+    <tr><th>ID</th><td>{{ record.id }}</td></tr>
+    <tr><th>Pacient</th><td>{{ patient_name }}</td></tr>
+    <tr><th>Vyšetřující</th><td>{{ user_name }}</td></tr>
+    <tr><th>Timestamp</th><td>{{ record.timestamp }}</td></tr>
+    <tr><th>Occupation</th><td>{{ record.occupation }}</td></tr>
+    <tr><th>Lifestyle</th><td>{{ record.lifestyle }}</td></tr>
+    <tr><th>Sleep pattern</th><td>{{ record.sleep_pattern }}</td></tr>
+    <tr><th>Sleep duration</th><td>{{ record.sleep_duration }}</td></tr>
+    <tr><th>Version</th><td>{{ record.version }}</td></tr>
+    <tr><th>Created at</th><td>{{ record.created_at }}</td></tr>
+    <tr><th>Updated at</th><td>{{ record.updated_at }}</td></tr>
+</table>
+<a href="/patients/{{ record.patient_id }}" class="button">⬅️ Zpět na pacienta</a>
+{% endblock %}

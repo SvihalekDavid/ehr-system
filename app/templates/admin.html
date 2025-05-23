@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Administrace{% endblock %}
+{% block content %}
+<h2>Administrace systému</h2>
+<p>Vyberte oblast správy:</p>
+<div style="display: flex; gap: 20px;">
+    <a href="/admin/users" class="button">👤 Uživatelé</a>
+    <a href="/admin/organisations" class="button">🏢 Organizace</a>
+</div>
+{% endblock %}

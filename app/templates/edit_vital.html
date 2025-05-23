@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Upravit vitální funkce{% endblock %}
+{% block content %}
+<h2>Upravit vitální funkce</h2>
+<form action="/vital/{{ record.id }}/edit" method="post">
+    <label for="timestamp">Datum a čas záznamu:</label><br>
+    <input type="datetime-local" name="timestamp" value="{{ record.timestamp.strftime('%Y-%m-%dT%H:%M') }}" required><br><br>
+
+    <label for="user_id">Zapsal uživatel:</label><br>
+    <select name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user.id }}" {% if user.id == record.user_id %}selected{% endif %}>{{ user.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="temperature">Teplota (°C):</label><br>
+    <input type="number" step="0.1" name="temperature" value="{{ record.temperature }}"><br><br>
+
+    <label for="bp_systolic">Systolický tlak:</label><br>
+    <input type="number" name="bp_systolic" value="{{ record.bp_systolic }}"><br><br>
+
+    <label for="bp_diastolic">Diastolický tlak:</label><br>
+    <input type="number" name="bp_diastolic" value="{{ record.bp_diastolic }}"><br><br>
+
+    <label for="heart_rate">Tepová frekvence:</label><br>
+    <input type="number" name="heart_rate" value="{{ record.heart_rate }}"><br><br>
+
+    <label for="version">Verze záznamu:</label><br>
+    <input type="number" name="version" value="{{ record.version }}" required><br><br>
+
+    <button type="submit" class="button">💾 Uložit změny</button>
+</form>
+{% endblock %}

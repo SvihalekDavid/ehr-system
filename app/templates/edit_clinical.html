@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Upravit klinické vyšetření{% endblock %}
+{% block content %}
+<h2>Upravit klinické vyšetření</h2>
+<form action="/clinical/{{ record.id }}/edit" method="post">
+    <label for="timestamp">Datum a čas vyšetření:</label><br>
+    <input type="datetime-local" name="timestamp" value="{{ record.timestamp.strftime('%Y-%m-%dT%H:%M') }}" required><br><br>
+
+    <label for="user_id">Vyšetřující lékař:</label><br>
+    <select name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user.id }}" {% if user.id == record.user_id %}selected{% endif %}>{{ user.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label for="gcs">GCS skóre:</label><br>
+    <input type="number" name="gcs" value="{{ record.gcs }}"><br><br>
+
+    <label>Orientace:</label><br>
+    <select name="orientation">
+        <option value="False" {% if not record.orientation %}selected{% endif %}>Ne</option>
+        <option value="True" {% if record.orientation %}selected{% endif %}>Ano</option>
+    </select><br><br>
+
+    <label for="arm_strength">Síla horních končetin:</label><br>
+    <input type="text" name="arm_strength" value="{{ record.arm_strength }}"><br><br>
+
+    <label for="leg_strength">Síla dolních končetin:</label><br>
+    <input type="text" name="leg_strength" value="{{ record.leg_strength }}"><br><br>
+
+    <label for="clinical_note">Záznam / poznámka:</label><br>
+    <textarea name="clinical_note">{{ record.clinical_note }}</textarea><br><br>
+
+    <label for="version">Verze záznamu:</label><br>
+    <input type="number" name="version" value="{{ record.version }}" required><br><br>
+
+    <button type="submit" class="button">💾 Uložit změny</button>
+</form>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Upravit neurologické symptomy{% endblock %}
+{% block content %}
+<h2>Upravit neurologické symptomy</h2>
+<form action="/neuro/{{ record.id }}/edit" method="post">
+    <label for="timestamp">Datum a čas záznamu:</label><br>
+    <input type="datetime-local" name="timestamp" value="{{ record.timestamp.strftime('%Y-%m-%dT%H:%M') }}" required><br><br>
+
+    <label for="user_id">Vyšetřující lékař:</label><br>
+    <select name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user.id }}" {% if user.id == record.user_id %}selected{% endif %}>{{ user.name }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Bolest hlavy:</label><br>
+    <select name="headache">
+        <option value="False" {% if not record.headache %}selected{% endif %}>Ne</option>
+        <option value="True" {% if record.headache %}selected{% endif %}>Ano</option>
+    </select><br><br>
+
+    <label for="headache_type">Typ bolesti hlavy:</label><br>
+    <input type="text" name="headache_type" value="{{ record.headache_type }}"><br><br>
+
+    <label for="intensity">Intenzita (1-10):</label><br>
+    <input type="number" name="intensity" value="{{ record.intensity }}"><br><br>
+
+    <label>Závratě:</label><br>
+    <select name="dizziness">
+        <option value="False" {% if not record.dizziness %}selected{% endif %}>Ne</option>
+        <option value="True" {% if record.dizziness %}selected{% endif %}>Ano</option>
+    </select><br><br>
+
+    <label>Poruchy rovnováhy:</label><br>
+    <select name="balance_issues">
+        <option value="False" {% if not record.balance_issues %}selected{% endif %}>Ne</option>
+        <option value="True" {% if record.balance_issues %}selected{% endif %}>Ano</option>
+    </select><br><br>
+
+    <label>Poruchy vědomí:</label><br>
+    <select name="consciousness_issues">
+        <option value="False" {% if not record.consciousness_issues %}selected{% endif %}>Ne</option>
+        <option value="True" {% if record.consciousness_issues %}selected{% endif %}>Ano</option>
+    </select><br><br>
+
+    <label>Pocit opilosti:</label><br>
+    <select name="drunk_feeling">
+        <option value="False" {% if not record.drunk_feeling %}selected{% endif %}>Ne</option>
+        <option value="True" {% if record.drunk_feeling %}selected{% endif %}>Ano</option>
+    </select><br><br>
+
+    <label for="version">Verze záznamu:</label><br>
+    <input type="number" name="version" value="{{ record.version }}" required><br><br>
+
+    <button type="submit" class="button">💾 Uložit změny</button>
+</form>
+{% endblock %}

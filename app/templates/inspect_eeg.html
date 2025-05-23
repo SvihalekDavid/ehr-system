@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Detail EEG záznamu{% endblock %}
+{% block content %}
+<h2>Detail EEG záznamu</h2>
+<table>
+    <tr><th>ID</th><td>{{ record.id }}</td></tr>
+    <tr><th>Pacient</th><td>{{ patient_name }}</td></tr>
+    <tr><th>Vyšetřující</th><td>{{ user_name }}</td></tr>
+    <tr><th>Datum a čas</th><td>{{ record.timestamp }}</td></tr>
+    <tr><th>Typ EEG</th><td>{{ record.eeg_type }}</td></tr>
+    <tr><th>Dominantní frekvence</th><td>{{ record.dominant_frequency }}</td></tr>
+    <tr><th>Abnormální rytmy</th><td>{{ "ano" if record.abnormal_rhythms else "ne" }}</td></tr>
+    <tr><th>Typ abnormálního rytmu</th><td>{{ record.abnormal_rhythm_type }}</td></tr>
+    <tr><th>Komentář technika</th><td>{{ record.technician_comment }}</td></tr>
+    <tr><th>Verze</th><td>{{ record.version }}</td></tr>
+    <tr><th>Vytvořeno</th><td>{{ record.created_at }}</td></tr>
+    <tr><th>Upraveno</th><td>{{ record.updated_at }}</td></tr>
+</table>
+<br>
+<a href="/patients/{{ record.patient_id }}" class="button">⬅️ Zpět na pacienta</a>
+{% endblock %}
