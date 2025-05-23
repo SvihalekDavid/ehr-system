@@ -5,7 +5,7 @@ Je potřeba nejdříve vytvořit Organizaci (nemocnice) a pak User (doktor) v Ad
 
 ## 📦 Spuštění pomocí Dockeru
 
-### 1. Sestavení obrazu
+### 1. Sestavení image
 
 docker build -t ehr-system .
 
