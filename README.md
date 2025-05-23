@@ -1,6 +1,6 @@
-Archetypy, Templates a ER diagram jsou ve složce /data
+Archetypy, Templates, Terminologie a ER diagram jsou ve složce /data
 
-Je potřeba nejdříve vytvořit Organizaci (nemocnice) a pak User (doktor) v Adminské části
+Je potřeba nejdříve vytvořit Organizaci (nemocnice) a pak User (doktor) v Admin části aplikace.
 
 
 ## 📦 Spuštění pomocí Dockeru
